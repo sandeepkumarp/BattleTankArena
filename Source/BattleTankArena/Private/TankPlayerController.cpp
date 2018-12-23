@@ -10,5 +10,15 @@ ATank* ATankPlayerController::GetControlledTank() const
 
 void ATankPlayerController::BeginPlay()
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	Super::BeginPlay();
+
+	auto ControlledTank = GetControlledTank();
+	if (!ControlledTank)
+	{
+		UE_LOG(LogTemp, Error, TEXT("TPC not possesing a tank"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("TPC possessing %s"), *ControlledTank->GetName());
+	}
 }
