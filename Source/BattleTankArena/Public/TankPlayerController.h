@@ -9,16 +9,30 @@
 class ATank;
 
 /**
- * 
+ *
  */
 UCLASS()
 class BATTLETANKARENA_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
 public:
+	virtual void BeginPlay() override;
+
+
+	virtual void Tick(float DeltaSeconds) override;
+
+private:
 	ATank* GetControlledTank() const;
 
-	virtual void BeginPlay() override;
+	void AimTowardsCrosshair();
+
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
+
+private:
+	//Cached Instance for performance
+	ATank* controlledTank;
+
+	FVector HitLocation;
 
 };
